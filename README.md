@@ -116,7 +116,7 @@ Discovery returns a service on port 11100, a look at the node 2 diagnostic outpu
 
 returns
 
-    ```xml
+```xml
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
     <songs service="LocalMusic" id="13">
         <album time="3804" quality="cd">
@@ -138,13 +138,13 @@ returns
 * /Add adds items to the play queue and starts them, e.g.
 
     Play Now
-         /Add?playnow=1&where=nextAlbum&service=LocalMusic&album=%2A%2A%2Ak%20the%20Millenium&artist=The%20KLF
+        /Add?playnow=1&where=nextAlbum&service=LocalMusic&album=%2A%2A%2Ak%20the%20Millenium&artist=The%20KLF
 
     Add Next
-         /Add?playnow=-1&where=nextAlbum&service=LocalMusic&album=Vs.%20T-World%20-%202000&artist=GusGus
+        /Add?playnow=-1&where=nextAlbum&service=LocalMusic&album=Vs.%20T-World%20-%202000&artist=GusGus
 
     Play Last
-         /Add?playnow=-1&where=last&service=LocalMusic&album=Waiting%20for%20the%20Rights%20of%20Mu&artist=The%20KLF
+        /Add?playnow=-1&where=last&service=LocalMusic&album=Waiting%20for%20the%20Rights%20of%20Mu&artist=The%20KLF
 
 * /Artwork returns the cover artwork for a specified album/artist,
 
