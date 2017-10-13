@@ -133,7 +133,7 @@ returns
             <quality>cd</quality>
         </song>
     <song>....
-    ```
+```
 
 * /Add adds items to the play queue and starts them, e.g.
 
