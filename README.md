@@ -132,7 +132,7 @@ returns
             <date>2005</date>
             <quality>cd</quality>
         </song>
-    <song>....
+    <song>
 ```
 
 * /Add adds items to the play queue and starts them, e.g.
