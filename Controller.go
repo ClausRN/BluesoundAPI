@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
-	"encoding/xml"
+//	"encoding/xml"
 )
 
 // NewBluesoundController is creating a new controller
@@ -50,10 +50,3 @@ func (blueControl *BluesoundController) getContent(url string) ([]byte, error) {
     return data, nil
 }
 
-func main(){
-	var XMLData string
-	XMLData = "'<?xml version=1.0 encoding=UTF-8 standalone=yes?><SyncStatus icon=/images/players/N110_nt.png volume=-1 modelName=NODE 2 name=Cave model=N110 brand=Bluesound etag=3 schemaVersion=15 syncStat=3 id=192.168.1.45:11000 mac=90:56:82:3F:AA:A0></SyncStatus>"
-	var MySyncStatus BluesoundSyncStatus
-	xml.Unmarshal([]byte(XMLData), &MySyncStatus)
-	fmt.Println("Name:" + MySyncStatus.Name)
-}
