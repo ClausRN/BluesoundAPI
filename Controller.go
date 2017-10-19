@@ -14,7 +14,6 @@ import (
 
 // NewBluesoundController is creating a new controller
 func NewBluesoundController(FQDN string) (blueControl BluesoundController) {
-	blueControl.Name = ""
 	blueControl.baseURL = "http://" + FQDN + ":11000/"
 
 	blueControl.stopSignal = make(chan os.Signal, 1)

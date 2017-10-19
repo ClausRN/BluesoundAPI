@@ -115,7 +115,6 @@ type BluesoundController struct {
 	status     BluesoundStatus
 	syncStatus BluesoundSyncStatus
 	stopSignal chan os.Signal
-	Name       string
 	baseURL    string
 }
 
@@ -131,13 +130,13 @@ const (
 	bluesoundHTTPURIBack       string = "Back"
 	bluesoundHTTPURISkip       string = "Skip"
 	// BluesoundShuffleOn Shuffle is on
-	BluesoundShuffleOn int16 = 1
+	bluesoundShuffleOn int16 = 1
 	// BluesoundShuffleOff Shuffle is off
-	BluesoundShuffleOff int16 = 0
+	bluesoundShuffleOff int16 = 0
 	// BluesoundRepeatAll Repeat all tracks
-	BluesoundRepeatAll int16 = 0
+	bluesoundRepeatAll int16 = 0
 	// BluesoundRepeatTrack Repeat single track
-	BluesoundRepeatTrack int16 = 1
+	bluesoundRepeatTrack int16 = 1
 	// BluesoundRepeatOff Repeat is off
-	BluesoundRepeatOff int16 = 2
+	bluesoundRepeatOff int16 = 2
 )
