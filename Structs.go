@@ -4,6 +4,7 @@ import (
 	"encoding/xml"
 	"os"
 	"sync"
+	"time"
 )
 
 // BluesoundStatus is Status for player
@@ -129,6 +130,7 @@ type BluesoundController struct {
 	status     BluesoundStatus
 	syncStatus BluesoundSyncStatus
 	stopSignal chan os.Signal
+	pause      time.Duration
 	baseURL    string
 }
 

@@ -28,6 +28,10 @@ func NewBluesoundController(FQDN string) (blueControl BluesoundController) {
 func (blueControl *BluesoundController) Start() bool {
 	log.Println("About to start")
 	go blueControl.updateData()
+	for blueControl.pause == 0 {
+		time.Sleep(50 * time.Millisecond)
+	}
+	log.Println("Started")
 	return true
 }
 
@@ -296,7 +300,7 @@ func (blueControl *BluesoundController) updateData() {
 	var Running = true
 	var StatusType int
 	var StatusURL string
-	var pause time.Duration
+	//var pause time.Duration
 	for Running {
 		log.Println("Updating data")
 		switch StatusType {
@@ -324,10 +328,10 @@ func (blueControl *BluesoundController) updateData() {
 		StatusType++
 		if StatusType > 1 {
 			StatusType = 0
-			pause = 500
+			blueControl.pause = 500
 		}
 		select {
-		case <-time.After(pause * time.Millisecond):
+		case <-time.After(blueControl.pause * time.Millisecond):
 			if 1 == 0 {
 				log.Println("Dummy")
 			}

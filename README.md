@@ -18,6 +18,8 @@ var (
 
 mySound = BluesoundAPI.NewBluesoundController("192.168.2.220")
 mySound.Start()
+syncstat := mySound.SyncStatus()
+log.Printf("Brand: %s, Model: %s, Name: %s", syncstat.Brand, syncstat.Model, syncstat.Name)
 log.Printf("Player version: %s", mySound.GetVersion())
 
 mySound.Clear()
