@@ -7,6 +7,11 @@ A cross-platform Bluesound API for Google Go.
 Simple sample code:
 
 ```go
+import (
+    "log"
+    "github.com/ClausRN/BluesoundAPI"
+)
+
 var (
     mySound BluesoundAPI.BluesoundController
 )
