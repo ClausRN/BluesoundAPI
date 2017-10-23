@@ -59,6 +59,12 @@ type BluesoundVolume struct {
 	Volume  int      `xml:",chardata"`
 }
 
+// BluesoundPlayerVersion Returns player software version
+type BluesoundPlayerVersion struct {
+	XMLName xml.Name `xml:"version"`
+	Version string   `xml:",chardata"`
+}
+
 // BluesoundPlaylistNames Returned by player command request
 type BluesoundPlaylistNames struct {
 	//XMLName xml.Name `xml:"name"`
@@ -113,6 +119,8 @@ type BluesoundPlayQueue struct {
 	Modified int32                `xml:"modified,attr"`
 	Length   int32                `xml:"length,attr"`
 	ID       int32                `xml:"id,attr"`
+	Shuffle  int                  `xml:"shuffle,attr"`
+	Repeat   int                  `xml:"repeat,attr"`
 	Tracks   []BluesoundTrackName `xml:"song"`
 }
 
@@ -135,14 +143,14 @@ const (
 	bluesoundHTTPURIPause      string = "Pause"
 	bluesoundHTTPURIBack       string = "Back"
 	bluesoundHTTPURISkip       string = "Skip"
-	// BluesoundShuffleOn Shuffle is on
-	bluesoundShuffleOn int16 = 1
-	// BluesoundShuffleOff Shuffle is off
-	bluesoundShuffleOff int16 = 0
-	// BluesoundRepeatAll Repeat all tracks
-	bluesoundRepeatAll int16 = 0
-	// BluesoundRepeatTrack Repeat single track
-	bluesoundRepeatTrack int16 = 1
-	// BluesoundRepeatOff Repeat is off
-	bluesoundRepeatOff int16 = 2
+	// ShuffleOn Shuffle is on
+	ShuffleOn int16 = 1
+	// ShuffleOff Shuffle is off
+	ShuffleOff int16 = 0
+	// RepeatAll Repeat all tracks
+	RepeatAll int16 = 0
+	// RepeatTrack Repeat single track
+	RepeatTrack int16 = 1
+	// RepeatOff Repeat is off
+	RepeatOff int16 = 2
 )

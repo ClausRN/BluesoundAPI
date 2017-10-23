@@ -15,7 +15,7 @@ Much of the work decoding the http api is done by these two guys. A big thank yo
 
 ## Endpoint API
 
-Discovery returns a service on port 11100, a look at the node 2 diagnostic output from the app, and some wireshark runs, show this is a HTTP service. Endpoints seem to return xml, or image binary data, and support gzip compression. It unfortuantly doesn't use HTTP all that well [GETs that have side-effects, lack of useful caching headers], no doubt leading to the artwork caching problems in the desktop app.
+Discovery returns a service on port 11000, a look at the node 2 diagnostic output from the app, and some wireshark runs, show this is a HTTP service. Endpoints seem to return xml, or image binary data, and support gzip compression. It unfortuantly doesn't use HTTP all that well [GETs that have side-effects, lack of useful caching headers], no doubt leading to the artwork caching problems in the desktop app.
 
 * /SyncStatus returns high level info about the device, e.g.
 

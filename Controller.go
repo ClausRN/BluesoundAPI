@@ -55,6 +55,23 @@ func (blueControl *BluesoundController) SyncStatus() BluesoundSyncStatus {
 	return temp
 }
 
+// GetVersion returns the players software version
+func (blueControl *BluesoundController) GetVersion() (Version string) {
+	playstate := BluesoundPlayerVersion{}
+	if XMLDataBin, err := blueControl.getContent("GitVersion"); err != nil {
+		log.Printf("Failed to get XML: %v", err)
+	} else {
+		// log.Printf("Received XML answer: %s", string(XMLDataBin))
+		err = xml.Unmarshal(XMLDataBin, &playstate)
+		if err != nil {
+			log.Printf("XML data not valid: %s", err)
+		} else {
+			Version = playstate.Version
+		}
+	}
+	return
+}
+
 // Play starts the player from current track
 func (blueControl *BluesoundController) Play() (State BluesoundCommandState) {
 	return blueControl.sendCommandPlayPause(bluesoundHTTPURIPlay)
@@ -142,6 +159,50 @@ func (blueControl *BluesoundController) SetVolume(Level int) (State bool) {
 				log.Printf("XML data not valid: %s", err)
 			} else {
 				if playstate.Volume == Level {
+					success = true
+				}
+			}
+		}
+	}
+	return success
+}
+
+// SetShuffle sets the player shuffle mode
+func (blueControl *BluesoundController) SetShuffle(Level int) (State bool) {
+	var success = false
+	if Level >= 0 && Level <= 1 {
+		playstate := BluesoundPlayQueue{}
+		if XMLDataBin, err := blueControl.getContent("Shuffle?state=" + strconv.Itoa(Level)); err != nil {
+			log.Printf("Failed to get XML: %v", err)
+		} else {
+			// log.Printf("Received XML answer: %s", string(XMLDataBin))
+			err = xml.Unmarshal(XMLDataBin, &playstate)
+			if err != nil {
+				log.Printf("XML data not valid: %s", err)
+			} else {
+				if playstate.Shuffle == Level {
+					success = true
+				}
+			}
+		}
+	}
+	return success
+}
+
+// SetRepeat sets the player shuffle mode
+func (blueControl *BluesoundController) SetRepeat(Level int) (State bool) {
+	var success = false
+	if Level >= 0 && Level <= 2 {
+		playstate := BluesoundPlayQueue{}
+		if XMLDataBin, err := blueControl.getContent("Repeat?state=" + strconv.Itoa(Level)); err != nil {
+			log.Printf("Failed to get XML: %v", err)
+		} else {
+			// log.Printf("Received XML answer: %s", string(XMLDataBin))
+			err = xml.Unmarshal(XMLDataBin, &playstate)
+			if err != nil {
+				log.Printf("XML data not valid: %s", err)
+			} else {
+				if playstate.Repeat == Level {
 					success = true
 				}
 			}
