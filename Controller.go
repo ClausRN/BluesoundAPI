@@ -9,6 +9,7 @@ import (
 	"net/url"
 	"os"
 	"os/signal"
+	"strconv"
 	"time"
 )
 
@@ -121,6 +122,28 @@ func (blueControl *BluesoundController) Clear() (State bool) {
 		} else {
 			if playstate.Length == 0 {
 				success = true
+			}
+		}
+	}
+	return success
+}
+
+// SetVolume sets the player output level (0 - 100, 0 = Mute)
+func (blueControl *BluesoundController) SetVolume(Level int) (State bool) {
+	var success = false
+	if Level >= 0 && Level <= 100 {
+		playstate := BluesoundVolume{}
+		if XMLDataBin, err := blueControl.getContent("Volume?level=" + strconv.Itoa(Level)); err != nil {
+			log.Printf("Failed to get XML: %v", err)
+		} else {
+			// log.Printf("Received XML answer: %s", string(XMLDataBin))
+			err = xml.Unmarshal(XMLDataBin, &playstate)
+			if err != nil {
+				log.Printf("XML data not valid: %s", err)
+			} else {
+				if playstate.Volume == Level {
+					success = true
+				}
 			}
 		}
 	}

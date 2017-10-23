@@ -53,6 +53,12 @@ type BluesoundCommandStateSkipBack struct {
 	TrackID int32    `xml:",chardata"`
 }
 
+// BluesoundVolume Returned by player set volume request
+type BluesoundVolume struct {
+	XMLName xml.Name `xml:"volume"`
+	Volume  int      `xml:",chardata"`
+}
+
 // BluesoundPlaylistNames Returned by player command request
 type BluesoundPlaylistNames struct {
 	//XMLName xml.Name `xml:"name"`
