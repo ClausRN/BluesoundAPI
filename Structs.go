@@ -137,12 +137,21 @@ var (
 )
 
 const (
-	bluesoundHTTPURIStatus     string = "Status"
-	bluesoundHTTPURISyncStatus string = "SyncStatus"
-	bluesoundHTTPURIPlay       string = "Play"
-	bluesoundHTTPURIPause      string = "Pause"
-	bluesoundHTTPURIBack       string = "Back"
-	bluesoundHTTPURISkip       string = "Skip"
+	httpURIStatus     string = "Status"
+	httpURISyncStatus string = "SyncStatus"
+	httpURIPlay       string = "Play"
+	httpURIPause      string = "Pause"
+	httpURIBack       string = "Back"
+	httpURISkip       string = "Skip"
+	httpURIVersion    string = "GitVersion"
+	httpURIClear      string = "Clear"
+	httpURISetVolume  string = "Volume"
+	httpURIShuffle    string = "Shuffle"
+	httpURIRepeat     string = "Repeat"
+	httpURIPlaylists  string = "Playlists"
+	httpURISongs      string = "Songs"
+	httpURIPlaylist   string = "Playlist"
+	httpURIAdd        string = "Add"
 	// ShuffleOn Shuffle is on
 	ShuffleOn int = 1
 	// ShuffleOff Shuffle is off

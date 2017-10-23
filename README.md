@@ -1,10 +1,33 @@
 # Bluesound API
 
-A cross-platform Bluesound API for go-lang.
+A cross-platform Bluesound API for Google Go.
 
 ## Documentation and examples
 
-See the here:
+Simple sample code:
+
+```go
+var (
+    mySound BluesoundAPI.BluesoundController
+)
+
+mySound = BluesoundAPI.NewBluesoundController("192.168.2.220")
+mySound.Start()
+log.Printf("Player version: %s", mySound.GetVersion())
+
+mySound.Clear()
+mySound.SetVolume(20)
+mySound.SetShuffle(BluesoundAPI.ShuffleOn)
+mySound.SetRepeat(BluesoundAPI.RepeatAll)
+mySound.PlayPlaylist("Playlist 1")
+mySound.Play()
+
+stat := mySound.Status()
+log.Printf("Now playing - Artist: %s, Album: %s, Track %s", stat.Artist, stat.Album, stat.Name)
+
+mySound.Close()
+
+```
 
 ## Development
 

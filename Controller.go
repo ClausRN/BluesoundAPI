@@ -58,7 +58,7 @@ func (blueControl *BluesoundController) SyncStatus() BluesoundSyncStatus {
 // GetVersion returns the players software version
 func (blueControl *BluesoundController) GetVersion() (Version string) {
 	playstate := BluesoundPlayerVersion{}
-	if XMLDataBin, err := blueControl.getContent("GitVersion"); err != nil {
+	if XMLDataBin, err := blueControl.getContent(httpURIVersion); err != nil {
 		log.Printf("Failed to get XML: %v", err)
 	} else {
 		// log.Printf("Received XML answer: %s", string(XMLDataBin))
@@ -74,22 +74,22 @@ func (blueControl *BluesoundController) GetVersion() (Version string) {
 
 // Play starts the player from current track
 func (blueControl *BluesoundController) Play() (State BluesoundCommandState) {
-	return blueControl.sendCommandPlayPause(bluesoundHTTPURIPlay)
+	return blueControl.sendCommandPlayPause(httpURIPlay)
 }
 
 // Pause the player at current position
 func (blueControl *BluesoundController) Pause() (State BluesoundCommandState) {
-	return blueControl.sendCommandPlayPause(bluesoundHTTPURIPause)
+	return blueControl.sendCommandPlayPause(httpURIPause)
 }
 
 // Skip to next track
 func (blueControl *BluesoundController) Skip() (State BluesoundCommandStateSkipBack) {
-	return blueControl.sendCommandSkipBack(bluesoundHTTPURISkip)
+	return blueControl.sendCommandSkipBack(httpURISkip)
 }
 
 // Back to start or previous track
 func (blueControl *BluesoundController) Back() (State BluesoundCommandStateSkipBack) {
-	return blueControl.sendCommandSkipBack(bluesoundHTTPURIBack)
+	return blueControl.sendCommandSkipBack(httpURIBack)
 }
 
 // sendCommandPlayPause sends a simple command to the player
@@ -129,7 +129,7 @@ func (blueControl *BluesoundController) sendCommandSkipBack(Command string) (Sta
 func (blueControl *BluesoundController) Clear() (State bool) {
 	var success = false
 	playstate := BluesoundPlayQueue{}
-	if XMLDataBin, err := blueControl.getContent("Clear"); err != nil {
+	if XMLDataBin, err := blueControl.getContent(httpURIClear); err != nil {
 		log.Printf("Failed to get XML: %v", err)
 	} else {
 		// log.Printf("Received XML answer: %s", string(XMLDataBin))
@@ -150,7 +150,7 @@ func (blueControl *BluesoundController) SetVolume(Level int) (State bool) {
 	var success = false
 	if Level >= 0 && Level <= 100 {
 		playstate := BluesoundVolume{}
-		if XMLDataBin, err := blueControl.getContent("Volume?level=" + strconv.Itoa(Level)); err != nil {
+		if XMLDataBin, err := blueControl.getContent(httpURISetVolume + "?level=" + strconv.Itoa(Level)); err != nil {
 			log.Printf("Failed to get XML: %v", err)
 		} else {
 			// log.Printf("Received XML answer: %s", string(XMLDataBin))
@@ -172,7 +172,7 @@ func (blueControl *BluesoundController) SetShuffle(Level int) (State bool) {
 	var success = false
 	if Level >= 0 && Level <= 1 {
 		playstate := BluesoundPlayQueue{}
-		if XMLDataBin, err := blueControl.getContent("Shuffle?state=" + strconv.Itoa(Level)); err != nil {
+		if XMLDataBin, err := blueControl.getContent(httpURIShuffle + "?state=" + strconv.Itoa(Level)); err != nil {
 			log.Printf("Failed to get XML: %v", err)
 		} else {
 			// log.Printf("Received XML answer: %s", string(XMLDataBin))
@@ -194,7 +194,7 @@ func (blueControl *BluesoundController) SetRepeat(Level int) (State bool) {
 	var success = false
 	if Level >= 0 && Level <= 2 {
 		playstate := BluesoundPlayQueue{}
-		if XMLDataBin, err := blueControl.getContent("Repeat?state=" + strconv.Itoa(Level)); err != nil {
+		if XMLDataBin, err := blueControl.getContent(httpURIRepeat + "?state=" + strconv.Itoa(Level)); err != nil {
 			log.Printf("Failed to get XML: %v", err)
 		} else {
 			// log.Printf("Received XML answer: %s", string(XMLDataBin))
@@ -214,7 +214,7 @@ func (blueControl *BluesoundController) SetRepeat(Level int) (State bool) {
 // GetPlaylists get playlist from player
 func (blueControl *BluesoundController) GetPlaylists() (State BluesoundPlaylists) {
 	playstate := BluesoundPlaylists{}
-	if XMLDataBin, err := blueControl.getContent("Playlists"); err != nil {
+	if XMLDataBin, err := blueControl.getContent(httpURIPlaylists); err != nil {
 		log.Printf("Failed to get XML: %v", err)
 	} else {
 		// log.Printf("Received XML answer: %s", string(XMLDataBin))
@@ -229,7 +229,7 @@ func (blueControl *BluesoundController) GetPlaylists() (State BluesoundPlaylists
 // GetPlaylist get playlist from player
 func (blueControl *BluesoundController) GetPlaylist(Playlist string) (State BluesoundPlaylist) {
 	playstate := BluesoundPlaylist{}
-	if XMLDataBin, err := blueControl.getContent("Songs?playlist=" + url.QueryEscape(Playlist)); err != nil {
+	if XMLDataBin, err := blueControl.getContent(httpURISongs + "?playlist=" + url.QueryEscape(Playlist)); err != nil {
 		log.Printf("Failed to get XML: %v", err)
 	} else {
 		// log.Printf("Received XML answer: %s", string(XMLDataBin))
@@ -244,7 +244,7 @@ func (blueControl *BluesoundController) GetPlaylist(Playlist string) (State Blue
 // GetPlayQueue get playlist from player
 func (blueControl *BluesoundController) GetPlayQueue() (State BluesoundPlayQueue) {
 	playstate := BluesoundPlayQueue{}
-	if XMLDataBin, err := blueControl.getContent("Playlist"); err != nil {
+	if XMLDataBin, err := blueControl.getContent(httpURIPlaylist); err != nil {
 		log.Printf("Failed to get XML: %v", err)
 	} else {
 		// log.Printf("Received XML answer: %s", string(XMLDataBin))
@@ -259,7 +259,7 @@ func (blueControl *BluesoundController) GetPlayQueue() (State BluesoundPlayQueue
 // PlayPlaylist starts playing the playlist
 func (blueControl *BluesoundController) PlayPlaylist(Playlist string) (State BluesoundAddSong) {
 	playstate := BluesoundAddSong{}
-	if XMLDataBin, err := blueControl.getContent("Add?playlist=" + url.QueryEscape(Playlist) + "&playnow=-1"); err != nil {
+	if XMLDataBin, err := blueControl.getContent(httpURIAdd + "?playlist=" + url.QueryEscape(Playlist) + "&playnow=-1"); err != nil {
 		log.Printf("Failed to get XML: %v", err)
 	} else {
 		// log.Printf("Received XML answer: %s", string(XMLDataBin))
@@ -301,16 +301,15 @@ func (blueControl *BluesoundController) updateData() {
 		log.Println("Updating data")
 		switch StatusType {
 		case 0:
-			StatusURL = bluesoundHTTPURIStatus
+			StatusURL = httpURIStatus
 		case 1:
-			StatusURL = bluesoundHTTPURISyncStatus
+			StatusURL = httpURISyncStatus
 		}
 		XMLDataBin, err := blueControl.getContent(StatusURL)
 		if err != nil {
 			log.Printf("Could not get %s: %s", StatusURL, err)
 		} else {
 			statusUpdate.Lock()
-			//			err = xml.Unmarshal(XMLDataBin, &blueControl.status)
 			switch StatusType {
 			case 0:
 				err = xml.Unmarshal(XMLDataBin, &blueControl.status)
