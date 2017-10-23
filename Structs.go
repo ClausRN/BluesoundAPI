@@ -144,13 +144,13 @@ const (
 	bluesoundHTTPURIBack       string = "Back"
 	bluesoundHTTPURISkip       string = "Skip"
 	// ShuffleOn Shuffle is on
-	ShuffleOn int16 = 1
+	ShuffleOn int = 1
 	// ShuffleOff Shuffle is off
-	ShuffleOff int16 = 0
+	ShuffleOff int = 0
 	// RepeatAll Repeat all tracks
-	RepeatAll int16 = 0
+	RepeatAll int = 0
 	// RepeatTrack Repeat single track
-	RepeatTrack int16 = 1
+	RepeatTrack int = 1
 	// RepeatOff Repeat is off
-	RepeatOff int16 = 2
+	RepeatOff int = 2
 )
