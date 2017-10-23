@@ -164,4 +164,8 @@ const (
 	RepeatTrack int = 1
 	// RepeatOff Repeat is off
 	RepeatOff int = 2
+	// VolumeMute = no sound
+	VolumeMute int = 0
+	// VolumeMax = Max output level
+	VolumeMax int = 100
 )

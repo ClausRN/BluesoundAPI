@@ -22,7 +22,7 @@ syncstat := mySound.SyncStatus()
 log.Printf("Brand: %s, Model: %s, Name: %s", syncstat.Brand, syncstat.Model, syncstat.Name)
 log.Printf("Player version: %s", mySound.GetVersion())
 
-mySound.Clear()
+mySound.ClearPlayQueue()
 mySound.SetVolume(20)
 mySound.SetShuffle(BluesoundAPI.ShuffleOn)
 mySound.SetRepeat(BluesoundAPI.RepeatAll)

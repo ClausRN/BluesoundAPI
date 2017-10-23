@@ -129,8 +129,8 @@ func (blueControl *BluesoundController) sendCommandSkipBack(Command string) (Sta
 	return playstate
 }
 
-// Clear the playlist
-func (blueControl *BluesoundController) Clear() (State bool) {
+// ClearPlayQueue the current playqueue
+func (blueControl *BluesoundController) ClearPlayQueue() (State bool) {
 	var success = false
 	playstate := BluesoundPlayQueue{}
 	if XMLDataBin, err := blueControl.getContent(httpURIClear); err != nil {
@@ -300,7 +300,6 @@ func (blueControl *BluesoundController) updateData() {
 	var Running = true
 	var StatusType int
 	var StatusURL string
-	//var pause time.Duration
 	for Running {
 		log.Println("Updating data")
 		switch StatusType {
